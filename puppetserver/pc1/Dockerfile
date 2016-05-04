@@ -20,9 +20,7 @@ RUN \
 RUN \
      apt update \ 
   && apt install -y puppetserver \
-  && rm -rf /var/lib/puppet/ssl/ \
-       /etc/apache2/sites-available/puppetmaster.conf \
-       /var/log/puppetlabs/puppetserver/* \
+  && rm -rf /var/log/puppetlabs/puppetserver/* \
   && ln -s /dev/stdout /var/log/puppetlabs/masterhttp.log \
   && ln -s /dev/stdout /var/log/puppetlabs/puppetserver-access.log \
   && ln -s /dev/stdout /var/log/puppetlabs/puppetserver.log \
