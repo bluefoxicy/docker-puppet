@@ -1,0 +1,40 @@
+# docker-compose.yml for Puppet
+# e.g. /opt/containers/puppet/docker-compose.yml
+puppetserver:
+  image: puppetserver:pc1
+  environment:
+    PUPPETSERVER_HOSTNAME: puppet.example.com
+    PUPPETSERVER_GENCONFIG: yes
+  ports:
+    - "8140:8140"
+  volumes:
+    - /opt/containers/puppet/data/ssl:/etc/puppetlabs/puppet/ssl
+    - /opt/containers/puppet/data/code:/etc/puppetlabs/code
+  links:
+    - puppetdb
+  restart: always
+puppetdb:
+  image: puppetdb:pc1
+  environment:
+    PUPPETSERVER_HOSTNAME: puppet.example.com
+    PUPPETSERVER_GENCONFIG: yes
+    PUPPETDB_SERVER: "db"
+    PUPPETDB_DATABASE: "puppetdb"
+    PUPPETDB_PASSWORD: "puppetdb"
+  expose:
+    - 8081
+  volumes:
+    - "FIXME"
+  links:
+    - db
+  restart: always
+db:
+  image: postgres:9.5
+  environment:
+    POSTGRES_USER: "puppetdb"
+    POSTGRES_PASSWORD: "puppetdb"
+  expose:
+    - 5432
+  volumes:
+    - /opt/containers/puppet/data/db:/var/lib/postgresql/data
+  restart: always
