@@ -37,7 +37,7 @@ copy puppet.conf.tmpl /etc/puppetlabs/puppet/
 
 EXPOSE 8140
 
-VOLUME /opt/puppetlabs/puppet/ssl /etc/puppetlabs/code
+VOLUME /etc/puppetlabs/puppet/ssl /etc/puppetlabs/code
 
 CMD ["run-puppet.sh"]
 

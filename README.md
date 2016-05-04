@@ -18,7 +18,7 @@ file.
 
 Use the following volumes:
 
-* `/opt/puppetlabs/puppet/ssl`: CA and Puppet agent certificates.
+* `/etc/puppetlabs/puppet/ssl`: CA and Puppet agent certificates.
 This must be writable.
 * `/etc/puppetlabs/code`:  Environments.  This may be read-only.
 * `/etc/puppetlabs/puppet/puppet.conf`:  Main puppet configuration.
