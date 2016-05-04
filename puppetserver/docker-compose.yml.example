@@ -1,0 +1,13 @@
+# docker-compose.yml for Puppetmaster
+# e.g. /opt/containers/puppetmaster/docker-compose.yml
+puppetserver:
+  image: puppetserver:pc1
+  environment:
+    PUPPETMASTER_HOSTNAME: puppet.example.com
+    PUPPETMASTER_GENCONFIG: yes
+  ports:
+    - "8140:8140"
+  volumes:
+    - /opt/containers/puppetmaster/data/ssl:/opt/puppetlabs/puppet/ssl
+    - /opt/containers/puppetmaster/data/code:/etc/puppetlabs/code
+  restart: always
