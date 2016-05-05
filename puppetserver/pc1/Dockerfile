@@ -31,7 +31,8 @@ RUN \
   && find /var/cache/apt /var/lib/apt/lists -type f -delete
 
 copy run-puppet.sh /usr/local/sbin/
-copy puppet.conf.tmpl /etc/puppetlabs/puppet/
+copy puppet.conf.tmpl puppet.conf.puppetdb.tmpl puppetdb.conf.tmpl \
+  routes.yaml.tmpl /etc/puppetlabs/puppet/
 
 EXPOSE 8140
 
