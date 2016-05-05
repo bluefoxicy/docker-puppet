@@ -27,7 +27,9 @@ If you tweak this by hand, _mount it read-only_.
 ### Environment variables
 
 In the `environment` section in docker-compose.yml, you can use the
-following:
+following.
+
+#### puppetserver
 
 * *PUPPETSERVER_HOSTNAME*: Overrides the hostname.  Defaults to the
 container's FQDN.
@@ -38,9 +40,23 @@ the `certname` setting in `puppet.conf`.  Defaults to
 is `production`.
 * *PUPPETSERVER_GENCONFIG*:  Generates various configuration files
 if and only if they're writable.
+* *PUPPETDB_CONFIG*:  If set, will automatically configure PuppetDB.
+Several settings automatically set this to `auto`.
+* *PUPPETDB_URL*:  The URL of a PuppetDB server.  If unset and
+`PUPPETDB_CONFIG` is set, will set itself to the value,
+`https://$PUPPETDB_HOST:$PUPPETDB_PORT`.  If set, sets
+`PUPPETDB_CONFIG` to `auto`.
+* *PUPPETDB_HOST*:  The host for PuppetDB.  Default is `puppetdb`.
+If set, sets `PUPPETDB_CONFIG` to `auto`.
+* *PUPPETDB_PORT*:  The port for PuppetDB.  Default is `8081`.  If
+set, sets `PUPPETDB_CONFIG` to `auto`.
 
 If `PUPPETSERVER_GENCONFIG` is not unset, the container will try to
-generate `/etc/puppetlabs/puppet/puppet.conf` from a template.
+generate:
+
+* `/etc/puppetlabs/puppet/puppet.conf`
+* `/etc/puppetlabs/puppet/puppetdb.conf`
+* `/etc/puppetlabs/puppet/routes.yaml`
 
 The container will not attempt to generate these files if they are
 read-only, for example if mounted via `docker-compose.yml`:

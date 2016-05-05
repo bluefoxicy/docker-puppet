@@ -19,10 +19,8 @@ RUN \
 # set up logging
 RUN \
      apt update \ 
-  && apt install -y puppetserver \
-  && rm -rf /var/lib/puppet/ssl/ \
-       /etc/apache2/sites-available/puppetmaster.conf \
-       /var/log/puppetlabs/puppetserver/* \
+  && apt install -y puppetserver puppetdb-termini \
+  && rm -rf /var/log/puppetlabs/puppetserver/* \
   && ln -s /dev/stdout /var/log/puppetlabs/masterhttp.log \
   && ln -s /dev/stdout /var/log/puppetlabs/puppetserver-access.log \
   && ln -s /dev/stdout /var/log/puppetlabs/puppetserver.log \
@@ -33,7 +31,8 @@ RUN \
   && find /var/cache/apt /var/lib/apt/lists -type f -delete
 
 copy run-puppet.sh /usr/local/sbin/
-copy puppet.conf.tmpl /etc/puppetlabs/puppet/
+copy puppet.conf.tmpl puppet.conf.puppetdb.tmpl puppetdb.conf.tmpl \
+  routes.yaml.tmpl /etc/puppetlabs/puppet/
 
 EXPOSE 8140
 
