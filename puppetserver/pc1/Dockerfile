@@ -19,7 +19,7 @@ RUN \
 # set up logging
 RUN \
      apt update \ 
-  && apt install -y puppetserver \
+  && apt install -y puppetserver puppetdb-termini \
   && rm -rf /var/log/puppetlabs/puppetserver/* \
   && ln -s /dev/stdout /var/log/puppetlabs/masterhttp.log \
   && ln -s /dev/stdout /var/log/puppetlabs/puppetserver-access.log \
